@@ -84,6 +84,7 @@ public class Program {
                         if (dungeon[room.y][room.x + 1].value == 0) {
                             dungeon[room.y][room.x + 1].value = 1;
                             dungeon[room.y][room.x + 1].setPosition(room.x + 1, room.y);
+                            dungeon[room.y][room.x + 1].path[1].created = true;
                             dungeon[room.y][room.x].path[0].created = true;
                             amountOfRoom--;
                             System.out.println("\n");
@@ -101,6 +102,7 @@ public class Program {
                         if (dungeon[room.y][room.x - 1].value == 0) {
                             dungeon[room.y][room.x - 1].value = 1;
                             dungeon[room.y][room.x - 1].setPosition(room.x - 1, room.y);
+                            dungeon[room.y][room.x - 1].path[0].created = true;
                             dungeon[room.y][room.x].path[1].created = true;
                             amountOfRoom--;
                             System.out.println("\n");
@@ -118,6 +120,7 @@ public class Program {
                         if (dungeon[room.y + 1][room.x].value == 0) {
                             dungeon[room.y + 1][room.x].value = 1;
                             dungeon[room.y + 1][room.x].setPosition(room.x, room.y + 1);
+  
                             dungeon[room.y][room.x].path[2].created = true;
                             amountOfRoom--;
                             System.out.println("\n");
