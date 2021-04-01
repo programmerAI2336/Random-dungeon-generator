@@ -71,14 +71,6 @@ public class DungeonGenerator {
                 }
             }
 
-            /*
-            Step 1 : choose a random room.
-            Step 2 : check if it have a uncreated path.
-            Step 3 : If yes, check if the next room is outside matrix. If not, return to step 1.
-            Step 4 : If next room isn't outside matrix then set value and location for it and set "created" of path of room is true.
-            Step 5 : return step 1 until amount of room = 0.
-             */
-
             Room room = existRoom.get(random.nextInt(existRoom.size()));
             int pathToNextRoom = random.nextInt(room.path.length);
 
