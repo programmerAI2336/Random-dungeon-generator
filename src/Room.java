@@ -1,7 +1,7 @@
 public class Room {
     public int x, y;
     public int value = 0;//0 is uncreated, 1 is normal room, 2 is spawn room, 3 is next-level room.
-    public final Path[] path = new Path[3];
+    public final Path[] path = new Path[4];
 
     /*
        path[0] is path on the right.

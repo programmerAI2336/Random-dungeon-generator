@@ -1,12 +1,16 @@
 import java.util.ArrayList;
 import java.util.Random;
 
-public class Program {
+public class DungeonGenerator {
     private int allRoom;
     private int amountOfRoom;
-    private Room[][] dungeon;
-    private int width, length;
+    public Room[][] dungeon;
+    public int width, length;
     private final Random random = new Random();
+
+    public DungeonGenerator() {
+        generateRoom();
+    }
 
     private Room[][] getDungeon() {
         int[] size = new int[5];
@@ -31,8 +35,9 @@ public class Program {
 
     private void generateSpawnRoom() {
         int x = random.nextInt(width);
-        dungeon[0][x].setPosition(x, 0);
-        dungeon[0][x].value = 2;
+        int y = random.nextInt(length);
+        dungeon[y][x].setPosition(x, y);
+        dungeon[y][x].value = 2;
         amountOfRoom--;
     }
 
@@ -75,7 +80,7 @@ public class Program {
              */
 
             Room room = existRoom.get(random.nextInt(existRoom.size()));
-            int pathToNextRoom = random.nextInt(3);
+            int pathToNextRoom = random.nextInt(room.path.length);
 
             if (!room.path[pathToNextRoom].created) {
 
@@ -84,15 +89,9 @@ public class Program {
                         if (dungeon[room.y][room.x + 1].value == 0) {
                             dungeon[room.y][room.x + 1].value = 1;
                             dungeon[room.y][room.x + 1].setPosition(room.x + 1, room.y);
+                            dungeon[room.y][room.x + 1].path[1].created = true;
                             dungeon[room.y][room.x].path[0].created = true;
                             amountOfRoom--;
-                            System.out.println("\n");
-                            System.out.println("Chosen room : " + "[" + room.x + "]" + "[" + room.y + "]");
-                            System.out.println("Path to next room : " + pathToNextRoom);
-                            System.out.println("Next room's position :" + "[" + (room.x + 1) + "]" + "[" + room.y + "]");
-                            System.out.println("Next room's value : " + dungeon[room.y][room.x + 1].value);
-                            System.out.println("Path to next room : " + pathToNextRoom + ", " + dungeon[room.y][room.x].path[0].created);
-                            System.out.println("\n");
                         }
                     }
                 }
@@ -101,15 +100,9 @@ public class Program {
                         if (dungeon[room.y][room.x - 1].value == 0) {
                             dungeon[room.y][room.x - 1].value = 1;
                             dungeon[room.y][room.x - 1].setPosition(room.x - 1, room.y);
+                            dungeon[room.y][room.x - 1].path[0].created = true;
                             dungeon[room.y][room.x].path[1].created = true;
                             amountOfRoom--;
-                            System.out.println("\n");
-                            System.out.println("Chosen room : " + "[" + room.x + "]" + "[" + room.y + "]");
-                            System.out.println("Path to next room : " + pathToNextRoom);
-                            System.out.println("Next room's position :" + "[" + (room.x - 1) + "]" + "[" + room.y + "]");
-                            System.out.println("Next room's value : " + dungeon[room.y][room.x - 1].value);
-                            System.out.println("Path to next room : " + pathToNextRoom + ", " + dungeon[room.y][room.x].path[1].created);
-                            System.out.println("\n");
                         }
                     }
                 }
@@ -118,15 +111,20 @@ public class Program {
                         if (dungeon[room.y + 1][room.x].value == 0) {
                             dungeon[room.y + 1][room.x].value = 1;
                             dungeon[room.y + 1][room.x].setPosition(room.x, room.y + 1);
+                            dungeon[room.y + 1][room.x].path[3].created = true;
                             dungeon[room.y][room.x].path[2].created = true;
                             amountOfRoom--;
-                            System.out.println("\n");
-                            System.out.println("Chosen room : " + "[" + room.x + "]" + "[" + room.y + "]");
-                            System.out.println("Path to next room : " + pathToNextRoom);
-                            System.out.println("Next room's position :" + "[" + room.x + "]" + "[" + (room.y + 1) + "]");
-                            System.out.println("Next room's value : " + dungeon[room.y + 1][room.x].value);
-                            System.out.println("Path to next room : " + pathToNextRoom + ", " + dungeon[room.y][room.x].path[2].created);
-                            System.out.println("\n");
+                        }
+                    }
+                }
+                if (pathToNextRoom == 3) {
+                    if (room.y - 1 >= 0) {
+                        if (dungeon[room.y - 1][room.x].value == 0) {
+                            dungeon[room.y - 1][room.x].value = 1;
+                            dungeon[room.y - 1][room.x].setPosition(room.x, room.y - 1);
+                            dungeon[room.y - 1][room.x].path[2].created = true;
+                            dungeon[room.y][room.x].path[3].created = true;
+                            amountOfRoom--;
                         }
                     }
                 }
@@ -144,13 +142,9 @@ public class Program {
             }
         }
         allRoom = getAmountOfRoom();
-        amountOfRoom = getAmountOfRoom();
+        amountOfRoom = allRoom;
         generateSpawnRoom();
         generateOtherRoom();
         printDungeon();
-    }
-
-    public static void main(String[] args) {
-        new Program().generateRoom();
     }
 }
