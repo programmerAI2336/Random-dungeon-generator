@@ -79,7 +79,11 @@ public class DungeonGenerator {
                 if (pathToNextRoom == 0) {
                     if (room.x + 1 < width) {
                         if (dungeon[room.y][room.x + 1].value == 0) {
-                            dungeon[room.y][room.x + 1].value = 1;
+                            if (amountOfRoom > 1) {
+                                dungeon[room.y][room.x + 1].value = 1;
+                            } else {
+                                dungeon[room.y][room.x + 1].value = 3;
+                            }
                             dungeon[room.y][room.x + 1].setPosition(room.x + 1, room.y);
                             dungeon[room.y][room.x + 1].path[1].created = true;
                             dungeon[room.y][room.x].path[0].created = true;
@@ -90,7 +94,11 @@ public class DungeonGenerator {
                 if (pathToNextRoom == 1) {
                     if (room.x - 1 >= 0) {
                         if (dungeon[room.y][room.x - 1].value == 0) {
-                            dungeon[room.y][room.x - 1].value = 1;
+                            if (amountOfRoom > 1) {
+                                dungeon[room.y][room.x - 1].value = 1;
+                            } else {
+                                dungeon[room.y][room.x - 1].value = 3;
+                            }
                             dungeon[room.y][room.x - 1].setPosition(room.x - 1, room.y);
                             dungeon[room.y][room.x - 1].path[0].created = true;
                             dungeon[room.y][room.x].path[1].created = true;
@@ -101,7 +109,11 @@ public class DungeonGenerator {
                 if (pathToNextRoom == 2) {
                     if (room.y + 1 < length) {
                         if (dungeon[room.y + 1][room.x].value == 0) {
-                            dungeon[room.y + 1][room.x].value = 1;
+                            if (amountOfRoom > 1) {
+                                dungeon[room.y + 1][room.x].value = 1;
+                            } else {
+                                dungeon[room.y + 1][room.x].value = 3;
+                            }
                             dungeon[room.y + 1][room.x].setPosition(room.x, room.y + 1);
                             dungeon[room.y + 1][room.x].path[3].created = true;
                             dungeon[room.y][room.x].path[2].created = true;
@@ -112,7 +124,11 @@ public class DungeonGenerator {
                 if (pathToNextRoom == 3) {
                     if (room.y - 1 >= 0) {
                         if (dungeon[room.y - 1][room.x].value == 0) {
-                            dungeon[room.y - 1][room.x].value = 1;
+                            if (amountOfRoom > 1) {
+                                dungeon[room.y - 1][room.x].value = 1;
+                            } else {
+                                dungeon[room.y - 1][room.x].value = 3;
+                            }
                             dungeon[room.y - 1][room.x].setPosition(room.x, room.y - 1);
                             dungeon[room.y - 1][room.x].path[2].created = true;
                             dungeon[room.y][room.x].path[3].created = true;

@@ -9,8 +9,10 @@ public class MainFrame extends JPanel {
         for (int x = 0; x < generator.width; x++) {
             for (int y = 0; y < generator.length; y++) {
                 if (generator.dungeon[y][x].value >= 1) {
-                    if(generator.dungeon[y][x].value == 2){
+                    if(generator.dungeon[y][x].value == 3){
                         g.setColor(Color.RED);
+                    } else if(generator.dungeon[y][x].value == 2){
+                        g.setColor(Color.GREEN);
                     } else if(generator.dungeon[y][x].value == 1){
                         g.setColor(Color.BLACK);
                     }
@@ -38,6 +40,7 @@ public class MainFrame extends JPanel {
         MainFrame mainFrame = new MainFrame();
         frame.add(mainFrame);
         frame.setSize(600,600);
+        frame.setLocationRelativeTo(null);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setVisible(true);
     }
